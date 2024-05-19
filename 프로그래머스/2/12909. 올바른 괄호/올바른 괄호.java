@@ -16,6 +16,7 @@ class Solution {
                 st.pop();
             }
         }
+        // ) 로직처리 이후에도 스택이 안 비어있으면 TF 처리
         return st.isEmpty();
     }
 }
