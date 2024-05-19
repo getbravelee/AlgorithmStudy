@@ -1,6 +1,6 @@
 class Solution {
     public int[] solution(long n) {
-        String s =""+n;
+        String s = "" + n;
 		 int[] answer = new int[s.length()];
 		 int cnt=0;
 		 while(n>0) {
