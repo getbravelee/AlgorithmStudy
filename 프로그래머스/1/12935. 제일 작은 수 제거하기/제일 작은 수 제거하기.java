@@ -7,7 +7,7 @@ class Solution {
         int[] except = {-1};
         // 배열 크기가 1이면 -1 return
         if(arr.length == 1) {
-            list.add(-1);
+
             return except;
         }
         // 최솟값 찾기
