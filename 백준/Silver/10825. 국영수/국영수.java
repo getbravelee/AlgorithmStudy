@@ -20,18 +20,16 @@ public class Main {
 		Collections.sort(list, new Comparator<Student>() {
 			@Override
 			public int compare(Student o1, Student o2) {
-				if(o1.kor != o2.kor) {
-					return o2.kor - o1.kor;
-				}
-				else if(o1.eng != o2.eng) {
+				if(o1.kor == o2.kor) {
+					if(o1.eng == o2.eng) {
+						if(o1.math == o2.math) {
+							return o1.name.compareTo(o2.name);
+						}
+						return o2.math - o1.math;
+					}
 					return o1.eng - o2.eng;
 				}
-				else if(o1.math != o2.math) {
-					return o2.math - o1.math;
-				}
-				else {
-					return o1.name.compareTo(o2.name);
-				}
+				return o2.kor - o1.kor;
 			}
 		});
 		for(Student s : list) {
