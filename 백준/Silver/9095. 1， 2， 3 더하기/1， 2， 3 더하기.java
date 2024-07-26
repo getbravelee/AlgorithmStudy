@@ -19,5 +19,6 @@ public class Main {
 		else if(n==3) return 4;
 
 		return dp(n-1)+dp(n-2)+dp(n-3);
+		
 	}
 }
