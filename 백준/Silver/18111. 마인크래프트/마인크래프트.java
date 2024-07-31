@@ -46,6 +46,9 @@ public class Main {
 					time = cnt;
 					h = k;
 				}
+				else {
+					break;
+				}
 			}
 		}
 		else {
@@ -64,6 +67,9 @@ public class Main {
 				if(time > cnt) {
 					time = cnt;
 					h = k;
+				}
+				else {
+					break;
 				}
 			}
 		}
