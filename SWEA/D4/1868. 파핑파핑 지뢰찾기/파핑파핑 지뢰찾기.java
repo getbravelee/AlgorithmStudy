@@ -29,6 +29,7 @@ public class Solution {
     static boolean[][] visited;
     static String[][] map;
     static int N, cnt;
+    static Queue<Point> q;
 
     static int[] dx = {1, 1, 0, -1, -1, -1, 0, 1};
     static int[] dy = {0, 1, 1, 1, 0, -1, -1, -1};
@@ -99,7 +100,7 @@ public class Solution {
     }
 
     public static void bfs(int x, int y) {
-        Queue<Point> q = new LinkedList<>();
+        q = new LinkedList<>();
         q.offer(new Point(x, y));
         visited[x][y] = true;
 
