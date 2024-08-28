@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.*;
 
 public class Main {
@@ -7,29 +8,32 @@ public class Main {
     static int totalPopulation;
     static int minDifference = Integer.MAX_VALUE;
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        N = sc.nextInt();
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+        N = Integer.parseInt(br.readLine());
         population = new int[N];
         adjMatrix = new boolean[N][N];
         totalPopulation = 0;
 
         // 각 구역의 인구 수 입력
+        st = new StringTokenizer(br.readLine());
         for (int i = 0; i < N; i++) {
-            population[i] = sc.nextInt();
+            population[i] = Integer.parseInt(st.nextToken());
             totalPopulation += population[i];
         }
 
         // 인접 행렬 입력
         for (int i = 0; i < N; i++) {
-            int adjCount = sc.nextInt();
+            st = new StringTokenizer(br.readLine());
+            int adjCount = Integer.parseInt(st.nextToken());
             for (int j = 0; j < adjCount; j++) {
-                int neighbor = sc.nextInt() - 1;
-                adjMatrix[i][neighbor] = true;
-                adjMatrix[neighbor][i] = true;
+                int neighbor = Integer.parseInt(st.nextToken());
+                adjMatrix[i][neighbor - 1] = true;
+                adjMatrix[neighbor - 1][i] = true;
             }
         }
+
 
         // 모든 가능한 부분집합을 탐색
         for (int i = 0; i < (1 << N); i++) {
