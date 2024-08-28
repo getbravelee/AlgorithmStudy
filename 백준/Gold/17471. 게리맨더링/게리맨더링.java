@@ -34,9 +34,9 @@ public class Main {
             }
         }
 
-
-        // 모든 가능한 부분집합을 탐색
-        for (int i = 0; i < (1 << N); i++) {
+        // 부분집합의 반만 탐색
+        int half = (1 << N) / 2;
+        for (int i = 1; i < half; i++) {
             if (isConnected(i) && isConnected(~i & ((1 << N) - 1))) {
                 int areaPopulation = calculatePopulation(i);
                 int otherPopulation = totalPopulation - areaPopulation;
