@@ -1,89 +1,70 @@
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
 public class Main {
-	
-	static int N,M,K,cnt,area;
-	static int[][] map;
-	static boolean[][] visited;
-	static int[] dx = {0, 1, 0, -1};
-	static int[] dy = {1, 0, -1, 0};
-	
-	static class Point {
-		int x, y;
-		
-		public Point(int x, int y) {
-			this.x = x;
-			this.y = y;
-		}
-	}
-	
-	public static void main(String[] args) throws Exception {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st = new StringTokenizer(br.readLine());
-		N = Integer.parseInt(st.nextToken());
-		M = Integer.parseInt(st.nextToken());
-		K = Integer.parseInt(st.nextToken());
-		map = new int[N][M];
-		visited = new boolean[N][M];
-		int maxX = N, maxY = M;
-		
-		int startX = 0, endX = 0;
-		int startY = 0, endY = 0;
-		for(int i = 0; i < K; i++) {
-			st = new StringTokenizer(br.readLine());
-			startX = Integer.parseInt(st.nextToken());
-			endX =  Integer.parseInt(st.nextToken());
-			startY =  Integer.parseInt(st.nextToken());
-			endY =  Integer.parseInt(st.nextToken());
-			
-			for(int j = N-endY; j < N-endX; j++) {
-				for(int k = startX; k < startY; k++) {
-					map[j][k] = 1;
-				}
-			}
-		}
-		
-		int cnt = 0;
-		List<Integer> areaList = new ArrayList<>();
-		for(int i = 0; i < N; i++) {
-			for(int j = 0; j < M; j++) {
-				if(map[i][j] == 0 && !visited[i][j]) {
-					area = 1;
-					bfs(i,j);
-					areaList.add(area);
-					cnt++;
-				}
-			}
-		}
-		Collections.sort(areaList);
-		System.out.println(cnt);
-		String s = "";
-		for(int i = 0; i < areaList.size(); i++) {
-			s += areaList.get(i) + " ";
-		}
-		System.out.println(s);
-	
-		
-	}
-	
-	public static void bfs(int x, int y) {
-		Queue<Point> q = new LinkedList<>();
-		visited[x][y] = true;
-		q.offer(new Point(x,y));
-		
-		while(!q.isEmpty()) {
-			Point tmp = q.poll();
-			for(int i = 0; i < 4; i++) {
-				int nx = tmp.x + dx[i];
-				int ny = tmp.y + dy[i];
-				
-				if(nx >= 0  && nx < N && ny >= 0 && ny < M && !visited[nx][ny] && map[nx][ny] == 0) {
-						q.offer(new Point(nx,ny));
-						visited[nx][ny] = true;
-						area++;
-				}
-			}
-		}
-	}
+    static int[][] board;
+    static int[] dx = {1, 0, -1, 0}, dy = {0, 1, 0, -1};
+    static int M, N, K, cnt = 0;
+    static int[][] visited;
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        M = Integer.parseInt(st.nextToken());
+        N = Integer.parseInt(st.nextToken());
+        K = Integer.parseInt(st.nextToken());
+        
+        board = new int[M][N];
+        visited = new int[M][N];
+        for (int k = 0; k < K; k++) {
+            st = new StringTokenizer(br.readLine());
+            int y1 = Integer.parseInt(st.nextToken());
+            int x1 = Integer.parseInt(st.nextToken());
+            int y2 = Integer.parseInt(st.nextToken());
+            int x2 = Integer.parseInt(st.nextToken());
+            for (int i = x1; i < x2; i++) {
+                for (int j = y1; j < y2; j++) {
+                    board[i][j] = 1;
+                }
+            }
+        }
+        
+        PriorityQueue<Integer> w = new PriorityQueue<>();
+        for (int i = 0; i < M; i++) {
+            for (int j = 0; j < N; j++) {
+                if (board[i][j] == 0 && visited[i][j] == 0) {
+                    w.add(bfs(i, j));
+                    cnt++;
+                }
+            }
+        }
+        
+        System.out.println(cnt);
+        int len = w.size();
+        for (int i = 0; i < len; i++) {
+            System.out.print(w.poll() + " ");
+        }
+    }
+    
+    
+    public static int bfs(int x, int y) {
+        int width = 1;
+        Queue<int[]> q = new LinkedList<>();
+        q.add(new int[] {x, y});
+        visited[x][y] = 1;
+        while (!q.isEmpty()) {
+            int[] pos = q.poll();
+            for (int d = 0; d < 4; d++) {
+                int nx = pos[0] + dx[d], ny = pos[1] + dy[d];
+                if (0 <= nx && nx < M && 0 <= ny && ny < N && board[nx][ny] == 0 && visited[nx][ny] == 0) {
+                    width++;
+                    visited[nx][ny] = 1;
+                    q.add(new int[] {nx, ny});
+                }
+            }
+        }
+        return width;
+    }
+
 }
+
