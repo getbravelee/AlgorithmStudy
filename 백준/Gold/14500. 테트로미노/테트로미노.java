@@ -4,7 +4,7 @@ import java.util.*;
 public class Main {
 
     static int N, M, sum, maxSum;
-    static int[][] map, copy;
+    static int[][] map;
 
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -13,12 +13,10 @@ public class Main {
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
         map = new int[N][M];
-        copy = new int[N][M];
         for (int i = 0; i < N; i++) {
             st = new StringTokenizer(br.readLine());
             for (int j = 0; j < M; j++) {
                 map[i][j] = Integer.parseInt(st.nextToken());
-                copy[i][j] = map[i][j];
             }
         }
         for (int i = 0; i < N; i++) {
