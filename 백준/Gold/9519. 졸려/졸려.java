@@ -13,32 +13,33 @@ public class Main {
         cs = s.toCharArray();
 
         // 주기 찾기
-        HashSet<String> seen = new HashSet<>();
+        HashSet<String> set = new HashSet<>();
         int cycleLength = 0;
         String original = new String(cs);
-        seen.add(original);  // 원래 문자열을 미리 추가
+        set.add(original);  // 원래 문자열을 미리 추가
 
         while (true) {
             func();
             cycleLength++;
             String current = new String(cs);
-            if (seen.contains(current)) {
+            if (set.contains(current)) {
                 break;
             }
-            seen.add(current);
+            set.add(current);
         }
 
         // X를 주기로 나눈 나머지만큼만 실행
-        int effectiveX = X % cycleLength;
+        X = X % cycleLength;
         cs = original.toCharArray();  // 초기 상태로 재설정
 
-        for (int i = 0; i < effectiveX; i++) {
+        for (int i = 0; i < X; i++) {
             func();
         }
 
         System.out.println(new String(cs));
     }
 
+    // 섞기
     static void func() {
         char[] arr = new char[len];
         for (int i = 0; i < len; i++) {
