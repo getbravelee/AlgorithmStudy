@@ -3,12 +3,16 @@ import java.util.*;
 public class Solution {
     public int solution(int n) {
         int answer = 0;
-        String n_str = Integer.toString(n);
-        for(int i = 0; i < n_str.length(); i++) {
-            answer += n % 10;
-            n = n / 10;
-        }
         
+        int a = (int) Math.pow(10, 8);
+        
+        while(a > 0) {
+            if(n / a != 0) {
+                answer += n / a;
+                n = n - (n / a) * a;
+            }
+            a /= 10;
+        }
 
         return answer;
     }
