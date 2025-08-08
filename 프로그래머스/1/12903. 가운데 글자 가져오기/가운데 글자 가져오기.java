@@ -1,12 +1,12 @@
 class Solution {
     public String solution(String s) {
         String answer = "";
-        String[] arr = s.split("");
-        if(arr.length % 2 != 0) {
-            answer += arr[arr.length / 2];
+        int len = s.length();
+        if(len % 2 != 0) {
+            answer = String.valueOf(s.charAt(len / 2));
         }
         else {
-            answer += arr[arr.length / 2 - 1] + arr[arr.length / 2];
+            answer = String.valueOf(s.charAt(len / 2 - 1)) + String.valueOf(s.charAt(len / 2));
         }
         return answer;
     }
