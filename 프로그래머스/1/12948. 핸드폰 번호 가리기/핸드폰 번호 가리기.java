@@ -1,13 +1,12 @@
 class Solution {
     public String solution(String phone_number) {
         String answer = "";
-        String[] num = phone_number.split("");
-        for(int i = 0; i < phone_number.length()-4; i++) {
-            num[i] = "*";
-            answer += num[i];
+        int len = phone_number.length();
+        for(int i = 0; i < len-4; i++) {
+            answer += "*";
         }
-        for(int i = phone_number.length()-4; i < phone_number.length(); i++) {
-            answer += num[i];
+        for(int i = len-4; i < len; i++) {
+            answer += String.valueOf(phone_number.charAt(i));
         }
         return answer;
     }
