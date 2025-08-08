@@ -1,30 +1,23 @@
-import java.lang.Math;
 import java.util.*;
-
 class Solution {
     public int[] solution(int[] arr) {
-        ArrayList<Integer> list = new ArrayList<Integer>();
-        int[] except = {-1};
-        // 배열 크기가 1이면 -1 return
-        if(arr.length == 1) {
-
-            return except;
+        int len = arr.length;
+        if(len == 1) return new int[]{-1};
+        
+        int min = Integer.MAX_VALUE;
+        int index = 0;
+        for(int i = 0; i < len; i++) {
+            if(min > arr[i]) {
+                min = arr[i];
+            }
         }
-        // 최솟값 찾기
-        int min = arr[0];
-        for(int i : arr) {
-            min = Math.min(min, i);
-        }
-        // 최솟값 빼고 list에 추가
-        for(int i : arr) {
-            if(i != min) {
-                list.add(i);
-            };
-        }
-        // 정답
-        int[] answer = new int[list.size()];
-        for(int i = 0; i < list.size(); i++) {
-            answer[i] = list.get(i);
+        
+        int[] answer = new int[len-1];
+        for(int i = 0; i < len; i++) {
+            if(arr[i] == min) {
+                continue;
+            }
+            answer[index++] = arr[i];
         }
         return answer;
     }
