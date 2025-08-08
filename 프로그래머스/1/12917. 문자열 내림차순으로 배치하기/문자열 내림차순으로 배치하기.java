@@ -1,12 +1,11 @@
 import java.util.*;
-
 class Solution {
     public String solution(String s) {
         String answer = "";
-        String[] str = s.split("");
-        Arrays.sort(str, Collections.reverseOrder());
-        for(int i = 0; i < str.length; i++) {
-            answer += str[i];
+        String[] arr = s.split("");
+        Arrays.sort(arr);
+        for(int i = arr.length-1; i >= 0; i--) {
+            answer += arr[i];
         }
         return answer;
     }
