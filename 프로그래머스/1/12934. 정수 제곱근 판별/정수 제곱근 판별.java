@@ -1,13 +1,13 @@
-import java.lang.Math;
-
 class Solution {
     public long solution(long n) {
-        // 제곱근
-        double sqrt = Math.sqrt(n);
-        // 제곱근 x가 long 일 때 x+1 의 제곱 반환
-        if(sqrt - (long)sqrt == 0) {
-            return (long)((sqrt+1) * (sqrt+1));
+        long answer = 0;
+        if((int)Math.sqrt(n) == Math.sqrt(n)) {
+            int temp = (int) Math.sqrt(n);
+            answer = (long) Math.pow(temp+1, 2);
         }
-        return -1;
+        else {
+            return -1;
+        }
+        return answer; 
     }
 }
