@@ -1,13 +1,13 @@
 class Solution {
     public String solution(String[] seoul) {
-        int kim = 0;
-        for(int i = 0; i < seoul.length; i++) {
-            if(seoul[i].equals("Kim")) {
-                kim = i;
+        String answer = "";
+        int count = 0;
+        for(String s : seoul) {
+            if(s.equals("Kim")) {
+                return "김서방은 " + count + "에 있다";
             }
+            count++;
         }
-        String answer = "김서방은 " +  kim + "에 있다";
-
         return answer;
     }
 }
