@@ -1,20 +1,17 @@
-/*
-n개의 빈병, a개 빈병 주고 b개의 콜라를 받는다.
-콜라를 마시면 빈병이 되기 때문에 빈병을 받는다고 생각하자.
-*/
 class Solution {
+    
     public int solution(int a, int b, int n) {
-        int answer = 0;
-        while(true) {
-            if(n - a >= 0) {
-                n -= a;
-                n += b;
-                answer += b;
-            }
-            else {
-                break;
-            }
+        return recursion(a, b, n);
+    }
+    private int recursion(int a, int b, int n) {
+        if(n < a) {
+            return 0;
         }
-        return answer;
+        // 새로 교환한 콜라
+        int new_bottle = (n / a) * b;
+        // 교환하고 남은 콜라
+        int remain_bottle = n % a;
+        // 전체 콜라 = 새로 교환한 콜라 + (새로 교환한 콜라 + 교환하고 남은 콜라)로 교환할 콜라
+        return new_bottle + recursion(a, b, new_bottle + remain_bottle);
     }
 }
