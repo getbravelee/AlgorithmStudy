@@ -1,25 +1,26 @@
-/*
-브루트포스
-ArrayList -> contains -> 없으면 추가 -> 클래스의 반환타입을 고려하여 결과 출력
-*/
 import java.util.*;
 class Solution {
+    static Set<Integer> set = new HashSet<>();
+    
     public int[] solution(int[] numbers) {
-        ArrayList<Integer> list = new ArrayList<>();
-        for(int i = 0; i < numbers.length; i++) {
-            for(int j = i+1; j < numbers.length; j++) {
-                int sum = 0;
-                sum = numbers[i] + numbers[j];
-                if(!list.contains(sum)) {
-                    list.add(sum);
-                }
-            }
-        }
+        combination(numbers, 0, 0, 0);
+        int[] answer = new int[set.size()];
+        List<Integer> list = new ArrayList<>(set);
         Collections.sort(list);
-        int[] answer = new int[list.size()];
-        for(int i = 0; i < answer.length; i++) {
+        for(int i = 0; i < list.size(); i++) {
             answer[i] = list.get(i);
         }
+        
         return answer;
+    }
+    
+    private void combination(int[] arr, int start, int count, int sum) {
+        if(count == 2) {
+            set.add(sum);
+            return;
+        }
+        for(int i = start; i < arr.length; i++) {
+            combination(arr, i + 1, count + 1, sum + arr[i]);
+        }
     }
 }
