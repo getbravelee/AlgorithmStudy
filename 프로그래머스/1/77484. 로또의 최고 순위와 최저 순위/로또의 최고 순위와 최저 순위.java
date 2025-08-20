@@ -1,32 +1,31 @@
-import java.util.HashSet;
-
 class Solution {
     public int[] solution(int[] lottos, int[] win_nums) {
         int[] answer = new int[2];
-        int[] rank = {6, 6, 5, 4, 3, 2, 1}; // 등수 매핑: 맞춘 갯수가 인덱스
-
-        // 당첨 번호를 HashSet에 넣어 중복 확인을 빠르게 한다
-        HashSet<Integer> winSet = new HashSet<>();
-        for (int num : win_nums) {
-            winSet.add(num);
-        }
-
-        int matchCount = 0;
-        int zeroCount = 0;
-
-        for (int num : lottos) {
-            if (num == 0) {
-                zeroCount++;
-            } else if (winSet.contains(num)) {
-                matchCount++;
+        int zero_count = 0;
+        int lotto_count = 0;
+        int rank = 7;
+        for(int num : lottos) {
+            if(num == 0) {
+                zero_count++;
             }
         }
+        for(int i = 0; i < lottos.length; i++) {
+            for(int j = 0; j < win_nums.length; j++) {
+                if(lottos[i] == win_nums[j]) {
+                    lotto_count++;
+                    rank--;
+                }
+            }
+        }
+        
 
-        // 최저 등수: 맞춘 갯수만 반영
-        answer[1] = rank[matchCount];
-        // 최고 등수: 맞춘 갯수 + 0의 갯수 반영
-        answer[0] = rank[matchCount + zeroCount];
-
+        // 최고 등수
+        answer[0] = rank - zero_count;
+        if(answer[0] == 7) answer[0] = 6;
+        // 최저 등수
+        answer[1] = rank;
+        if(answer[1] == 7) answer[1] = 6;
+        
         return answer;
     }
 }
