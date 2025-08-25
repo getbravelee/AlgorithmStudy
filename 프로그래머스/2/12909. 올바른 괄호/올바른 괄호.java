@@ -1,22 +1,28 @@
-import java.util.*;
-// ( 이면 추가 ) 이면 빼기
-// 비어있으면 true
-// 안 비어있으면 false
 class Solution {
     boolean solution(String s) {
-        Stack<Character> st = new Stack<>();
-        for(int i = 0; i < s.length(); i++) {
-            if(s.charAt(i) == '(') {
-                st.push('(');
-            }
-            else if(s.charAt(i) == ')') {
-                if(st.isEmpty()) {
-                    return false;
+        boolean answer = false;
+        if(s.substring(0,1).equals("(")) {
+            int count = 0;
+            
+            String[] arr = s.split("");
+            for(String str : arr) {
+                if(str.equals("(")) {
+                    count++;
                 }
-                st.pop();
+                else {
+                    count--;
+                }
+                
+                if(count < 0) {
+                    break;
+                }
+            }
+            
+            if(count == 0) {
+                answer = true;
             }
         }
-        // ) 로직처리 이후에도 스택이 안 비어있으면 TF 처리
-        return st.isEmpty();
+
+        return answer;
     }
 }
